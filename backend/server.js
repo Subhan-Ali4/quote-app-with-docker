@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 
 const quotes = [
-  { author: "Albert Einsteinn", quote: "Life is like riding a bicycle. To keep your balance, you must keep moving." },
+  { author: "Albert Einsteinnn", quote: "Life is like riding a bicycle. To keep your balance, you must keep moving." },
   { author: "Steve Jobss", quote: "Stay hungry, stay foolish." },
   { author: "Nelson Mandelaa", quote: "It always seems impossible until it’s done." },
   { author: "Muhammad Alii", quote: "Don’t count the days, make the days count." },
