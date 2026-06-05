@@ -57,7 +57,7 @@ jobs:
           script: |
             cd /home/ubuntu
             if [ ! -d "quote-app-with-docker" ]; then
-              git clone https://github.com/Subhan-Ali4/quote-app-with-docker.git
+              git clone https://github.com/Subhan-Ali4/quote-app-with-docker-cicd
             fi
             cd quote-app-with-docker
             git pull origin main
