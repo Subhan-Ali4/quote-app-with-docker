@@ -1,14 +1,13 @@
 version: "3.8"
-
 services:
-  backend: 
-    build: ./backend
-    ports: 
-      - 5000:5000
-  frontend:
-    build: ./frontend
+  backend:
+    image: subhan1011/quote-app-backend:latest
     ports:
-      - 3000:3000
+      - "5000:5000"
+
+  frontend:
+    image: subhan1011/quote-app-frontend:latest
+    ports:
+      - "3000:3000"
     depends_on:
       - backend
-          
