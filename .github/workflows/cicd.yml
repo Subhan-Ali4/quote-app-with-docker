@@ -63,5 +63,5 @@ jobs:
             git pull origin main
             docker pull subhan1011/quote-app-backend:latest
             docker pull subhan1011/quote-app-frontend:latest
-            docker-compose down
-            docker-compose up -d
+            docker compose down
+            docker compose up -d
