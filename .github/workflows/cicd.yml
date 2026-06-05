@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-and-push-backend:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
@@ -18,15 +18,34 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: build and push to docker
-        uses: docker/build-push-action@v5
+      - name: build and push backend
+        uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./backend
           push: true
-          tags: subhan1011/quote-app:latest
+          tags: subhan1011/quote-app-backend:latest
+
+  build-and-push-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: build and push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: true
+          tags: subhan1011/quote-app-frontend:latest
 
   deploy:
-    needs: build-and-push
+    needs: [build-and-push-backend, build-and-push-frontend]
     runs-on: ubuntu-latest
     steps:
       - name: deploy to ec2 server
@@ -42,6 +61,7 @@ jobs:
             fi
             cd quote-app-with-docker
             git pull origin main
-            docker pull subhan1011/quote-app:latest
+            docker pull subhan1011/quote-app-backend:latest
+            docker pull subhan1011/quote-app-frontend:latest
             docker-compose down
             docker-compose up -d
